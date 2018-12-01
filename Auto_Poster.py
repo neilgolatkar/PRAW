@@ -5,20 +5,23 @@ Created on Nov 29, 2018
 '''
 import praw
 from praw.models.listing.mixins import submission
+"""Input your own credentials, client secret, and client id here"""
+reddit = praw.Reddit(client_id='Client ID',
+                     client_secret='Client Secret', password='Password',
+                     user_agent='Your User Agent', username='Insert Your Username Here')
 
-reddit = praw.Reddit(client_id='VFcod8os0W8ybg',
-                     client_secret='aS1jDJrU3ag_MEaMldhz1aAlgog', password='pokemon10',
-                     user_agent='Test Auto_Poster v1', username='ANAL_DRAWSTRINGS')
-
+"""Check to see if your credentials worked"""
 print(reddit.user.me())
 
-subreddit=reddit.subreddit('ass+mooning+asstastic')
-fix_posts = reddit.subreddit('ass+mooning+asstastic').hot
-top_posts = fix_posts
-for submission in top_posts(limit=5):
+"Insert subreddits to take posts from"
+fix_posts = reddit.subreddit('subreddits to take posts from').hot
+for submission in fix_posts(limit=5):
     if not submission.stickied:
         link=submission.url
+        "Debug if link works"
         "print(link)"
         title=submission.title
+        "Debug if title works. Will throw error if non unicode in title"
         "print(title)"
-        reddit.subreddit('NSFW_ASS').submit(title, url=link)
+        "Input subreddit to post to"
+        reddit.subreddit('Subreddit to Post to').submit(title, url=link)
